@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Badges in the README, shared by the GitHub and PyPI pages.
+
 ## 0.1.0
 
 First release.

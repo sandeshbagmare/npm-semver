@@ -29,7 +29,7 @@ __all__ = [
     "sort_versions",
 ]
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 class InvalidVersion(ValueError):
