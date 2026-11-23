@@ -1,33 +1,23 @@
-# npm-semver
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sandeshbagmare/npm-semver/main/assets/banner.svg" width="100%" alt="npm-semver: npm semver ranges, parsed the way npm parses them">
+</p>
 
-[![PyPI](https://img.shields.io/pypi/v/npm-semver.svg)](https://pypi.org/project/npm-semver/)
-[![Python](https://img.shields.io/pypi/pyversions/npm-semver.svg)](https://pypi.org/project/npm-semver/)
-[![tests](https://github.com/sandeshbagmare/npm-semver/actions/workflows/ci.yml/badge.svg)](https://github.com/sandeshbagmare/npm-semver/actions/workflows/ci.yml)
-[![license](https://img.shields.io/pypi/l/npm-semver.svg)](https://github.com/sandeshbagmare/npm-semver/blob/main/LICENSE)
+<p align="center">
+  <a href="https://pypi.org/project/npm-semver/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/npm-semver.svg"></a>
+  <a href="https://pypi.org/project/npm-semver/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/npm-semver.svg"></a>
+  <a href="https://pypi.org/project/npm-semver/"><img alt="Downloads" src="https://img.shields.io/pypi/dm/npm-semver.svg"></a>
+  <a href="https://github.com/sandeshbagmare/npm-semver/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/sandeshbagmare/npm-semver/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/sandeshbagmare/npm-semver/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/pypi/l/npm-semver.svg"></a>
+  <a href="https://sandeshbagmare.github.io/npm-semver/"><img alt="docs" src="https://img.shields.io/badge/docs-online-2ea44f.svg"></a>
+  <a href="https://pypi.org/project/npm-semver/"><img alt="zero dependencies" src="https://img.shields.io/badge/dependencies-0-2ea44f.svg"></a>
+</p>
 
-Ask the question Python could not answer: **does this version satisfy this range?**
+<h3 align="center">npm semver ranges, parsed the way npm parses them</h3>
+<p align="center"><em>Standard library only. No runtime dependencies. Python 3.9+.</em></p>
 
-```python
->>> from npm_semver import satisfies, max_satisfying
->>> satisfies("1.4.2", "^1.2.0")
-True
->>> satisfies("2.0.0", "^1.2.0")
-False
->>> max_satisfying(["1.2.0", "1.4.2", "2.0.0"], "^1.2.0")
-Version(major=1, minor=4, patch=2, prerelease=(), build='')
-```
-
-`semver` compares versions and `packaging` parses them, but neither reads a
-**range**: `^1.2.0`, `~1.2`, `1.x`, `>=1.2 <2`, `1.2.3 - 2.0.0`, `a || b`. This package
-does, following npm's rules, including the parts people get wrong:
-
-- `^0.2.3` stops at `0.3.0`, while `^1.2.3` stops at `2.0.0`, and `^0.0.3` stops at `0.0.4`.
-- `>1.2` means `>=1.3.0`, and `<=1.2` means `<1.3.0`.
-- `1.2` and `1.2.x` mean "the 1.2 line", not "exactly 1.2".
-- A prerelease only matches a range that asks for a prerelease of the same
-  `major.minor.patch`, so `1.0.0-rc.1` does **not** satisfy `^1.0.0`.
-
-Zero dependencies, standard library only, Python 3.9+.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sandeshbagmare/npm-semver/main/assets/how.svg" width="720" alt="how npm-semver fits in">
+</p>
 
 ## Install
 
