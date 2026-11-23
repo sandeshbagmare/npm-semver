@@ -2,6 +2,8 @@
 
 - 0.1.2 — ship a `py.typed` marker; the docstring examples now run in the test suite.
 
+- 0.1.3 — the PyPI page now carries the animated banner and the diagram.
+
 ## 0.1.1
 
 - Badges in the README, shared by the GitHub and PyPI pages.

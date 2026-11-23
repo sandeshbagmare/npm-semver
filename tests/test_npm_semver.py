@@ -204,3 +204,54 @@ class TestVersionHelpers:
 
     def test_ordering_supports_chained_comparisons(self):
         assert parse("1.0.0") > parse("1.0.0-rc.1") < parse("1.0.0")
+
+
+class TestRigour:
+    """Inputs that are legal Python but not legal ranges, and the comparison protocol."""
+
+    def test_equality_with_another_type_returns_not_implemented(self):
+        assert Version(1, 0, 0).__eq__(object()) is NotImplemented
+        assert (Version(1, 0, 0) == "1.0.0") is False
+
+    def test_a_wildcard_after_a_non_numeric_piece(self):
+        with pytest.raises(InvalidRange, match="not a version in a range"):
+            parse_range("1.a.x")
+
+    def test_a_wildcard_after_three_numbers(self):
+        with pytest.raises(InvalidRange, match="not a semantic version"):
+            parse_range("1.2.3.x")
+
+    def test_a_token_that_is_not_a_comparator(self):
+        with pytest.raises(InvalidRange):
+            parse_range("&&")
+
+    def test_an_explicit_equals_with_a_partial_version(self):
+        assert satisfies("1.2.9", "=1.2")
+        assert not satisfies("1.3.0", "=1.2")
+
+    def test_a_range_that_is_not_a_string(self):
+        with pytest.raises(InvalidRange, match="expected a string"):
+            parse_range(3)
+
+    def test_a_prerelease_does_not_satisfy_a_plain_range(self):
+        assert not satisfies("1.0.0-rc.1", "^1.0.0")
+        assert satisfies("1.0.0-rc.1", ">=1.0.0-rc.0")
+
+    def test_the_wildcard_helper_on_three_numbers(self):
+        from npm_semver import _wildcard_comparators
+
+        assert _wildcard_comparators("1.2.3") == [("=", Version(1, 2, 3))]
+
+    def test_a_partial_version_prints_only_what_is_known(self):
+        assert str(Version(1)) == "1"
+        assert str(Version(1, 2)) == "1.2"
+
+    def test_the_comparator_helper_rejects_an_empty_token(self):
+        from npm_semver import _comparators_for
+
+        with pytest.raises(InvalidRange, match="cannot parse range token"):
+            _comparators_for("")
+
+    def test_an_upper_bound_fails_both_ways(self):
+        assert not satisfies("2.0.0", "<=1.0.0")
+        assert not satisfies("0.9.0", ">1.0.0")
